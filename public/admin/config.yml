@@ -22,16 +22,4 @@ collections:
       - {label: "작성자", name: "author", widget: "string", default: "뉴스라인365 편집부"}
       - {label: "속보 여부", name: "breaking", widget: "boolean", default: false}
 
-  - name: "settings"
-    label: "사이트 설정"
-    files:
-      - label: "일반 설정"
-        name: "general"
-        file: "content/settings/general.json"
-        fields:
-          - {label: "사이트 제목", name: "site_title", widget: "string", default: "뉴스라인365"}
-          - {label: "사이트 설명", name: "site_description", widget: "text"}
-          - {label: "대표 색상", name: "primary_color", widget: "string", default: "#000000"}
-
-# 로컬 개발용 설정
-local_backend: true
+local_backend: false
