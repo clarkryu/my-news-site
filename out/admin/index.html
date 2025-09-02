@@ -3,41 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>뉴스라인365 관리자</title>
+  <title>NewsLine365 Admin</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <div id="nc-root"></div>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: 'git-gateway',
-          branch: 'main'
-        },
-        media_folder: 'public/images/uploads',
-        public_folder: '/images/uploads',
-        collections: [{
-          name: 'news',
-          label: '뉴스 기사',
-          folder: 'content/news',
-          create: true,
-          slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-          fields: [
-            {label: '제목', name: 'title', widget: 'string'},
-            {label: '발행일', name: 'date', widget: 'datetime'},
-            {label: '카테고리', name: 'category', widget: 'select', options: ['정치', '경제', '사회', '문화', '국제', 'IT']},
-            {label: '태그', name: 'tags', widget: 'list'},
-            {label: '요약', name: 'summary', widget: 'text'},
-            {label: '대표 이미지', name: 'image', widget: 'image', required: false},
-            {label: '내용', name: 'body', widget: 'markdown'},
-            {label: '작성자', name: 'author', widget: 'string', default: '뉴스라인365 편집부'},
-            {label: '속보 여부', name: 'breaking', widget: 'boolean', default: false}
-          ]
-        }],
-        local_backend: false
-      }
-    });
+    CMS.init();
   </script>
 </body>
 </html>
