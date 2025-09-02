@@ -2,24 +2,11 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: public/images/uploads
-public_folder: /images/uploads
-
 collections:
-  - name: news
-    label: News Articles
-    folder: content/news
+  - name: test
+    label: Test
+    folder: content/test
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: Title, name: title, widget: string}
-      - {label: Date, name: date, widget: datetime}
-      - {label: Category, name: category, widget: select, options: [Politics, Economy, Society, Culture, International, IT]}
-      - {label: Tags, name: tags, widget: list}
-      - {label: Summary, name: summary, widget: text}
-      - {label: Featured Image, name: image, widget: image, required: false}
-      - {label: Content, name: body, widget: markdown}
-      - {label: Author, name: author, widget: string, default: NewsLine365 Editorial}
-      - {label: Breaking News, name: breaking, widget: boolean, default: false}
-
-local_backend: false
+      - {label: Body, name: body, widget: markdown}
