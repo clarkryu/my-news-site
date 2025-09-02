@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>뉴스라인365 관리자</title>
+</head>
+<body>
+  <!-- Decap CMS 로딩 -->
+  <div id="nc-root"></div>
+  
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // 명시적으로 config 경로 설정
+    window.CMS_MANUAL_INIT = true;
+    
+    // CMS 초기화
+    fetch('/admin/config.yml')
+      .then(response => response.text())
+      .then(configText => {
+        // YAML을 파싱하지 말고 그냥 경로만 지정
+        CMS.init({
+          config: {
+            backend: {
+              name: 'git-gateway',
+              branch: 'main'
+            },
+            media_folder: 'public/images/uploads',
+            public_folder: '/images/uploads',
+            collections: [
+              {
+                name: 'news',
+                label: '뉴스 기사',
+                folder: 'content/news',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  {label: '제목', name: 'title', widget: 'string'},
+                  {label: '발행일', name: 'date', widget: 'datetime'},
+                  {label: '카테고리', name: 'category', widget: 'select', options: ['정치', '경제', '사회', '문화', '국제', 'IT']},
+                  {label: '태그', name: 'tags', widget: 'list'},
+                  {label: '요약', name: 'summary', widget: 'text'},
+                  {label: '대표 이미지', name: 'image', widget: 'image', required: false},
+                  {label: '내용', name: 'body', widget: 'markdown'},
+                  {label: '작성자', name: 'author', widget: 'string', default: '뉴스라인365 편집부'},
+                  {label: '속보 여부', name: 'breaking', widget: 'boolean', default: false}
+                ]
+              }
+            ]
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Config 로딩 실패:', error);
+        // 기본 설정으로 시도
+        CMS.init();
+      });
+  </script>
+</body>
+</html>

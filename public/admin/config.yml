@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: "news"
+    label: "뉴스 기사"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "발행일", name: "date", widget: "datetime"}
+      - {label: "카테고리", name: "category", widget: "select", options: ["정치", "경제", "사회", "문화", "국제", "IT"]}
+      - {label: "태그", name: "tags", widget: "list"}
+      - {label: "요약", name: "summary", widget: "text"}
+      - {label: "대표 이미지", name: "image", widget: "image", required: false}
+      - {label: "내용", name: "body", widget: "markdown"}
+      - {label: "작성자", name: "author", widget: "string", default: "뉴스라인365 편집부"}
+      - {label: "속보 여부", name: "breaking", widget: "boolean", default: false}
+
+  - name: "settings"
+    label: "사이트 설정"
+    files:
+      - label: "일반 설정"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - {label: "사이트 제목", name: "site_title", widget: "string", default: "뉴스라인365"}
+          - {label: "사이트 설명", name: "site_description", widget: "text"}
+          - {label: "대표 색상", name: "primary_color", widget: "string", default: "#000000"}
+
+# 로컬 개발용 설정
+local_backend: true
